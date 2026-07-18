@@ -11,7 +11,7 @@ function App() {
   return (
     <Routes>
       <Route element={<DefaultLayout />}>
-        <Route path="overview" element={<Overview />} />
+        <Route path="/" element={<Overview />} />
         <Route path="kyc-review" element={<KycReview />} />
         <Route path="users" element={<Users />} />
         <Route path="transactions" element={<Transactions />} />
