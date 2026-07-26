@@ -14,9 +14,8 @@ export default function KycReview() {
 
   return (
     <div className="space-y-(--spacing-gutter)">
-          <div className="py-[var(--spacing-screen-x)] px-[22px]">
+          <div className="py-screen-x px-5.5">
             <KycContent />
-            {/* <KycDetail /> */}
           </div>
         </div>
   );

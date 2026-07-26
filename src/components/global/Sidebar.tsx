@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router";
 import logo from "../../assets/images/sfx-logo.png";
 import { motion } from "motion/react";
 
+import { useGetKycSubmissionsQuery } from "../../api/kyc";
 import CharmHome from "../icons/CharmHome";
 import MaterialSymbolsShieldOutline from "../icons/MaterialSymbolsShieldOutline";
 import LetsIconsUser from "../icons/LetsIconsUser";
@@ -37,6 +38,15 @@ const navigation = [
 ];
 
 export default function Sidebar() {
+  const { data, isLoading, isFetching, isError } =
+      useGetKycSubmissionsQuery({ status: "pending" });
+
+  const badgeContent = (() => {
+    if (isLoading || isFetching) return "...";
+    if (isError) return "!";
+    return data?.length ?? 0;
+  })();
+
   return (
     <nav className="isolate h-full w-full bg-sfx-ink p-[18px]">
       <div className="flex h-full flex-col justify-between">
@@ -77,13 +87,26 @@ export default function Sidebar() {
                             </span>
                           </div>
 
-                          {
-                            href === "/kyc-review" && (
-                              <span className={`shrink-0 inline-flex items-center justify-center font-rh-sb size-[20px] text-[12px] rounded-full ${isActive ? 'bg-sfx-card' : 'bg-sfx-danger text-sfx-card'}`}>
-                                7
-                              </span>
-                            )
-                          }
+                          {href === "/kyc-review" && (
+  <span
+    className={`shrink-0 inline-flex size-[20px] items-center justify-center rounded-full text-[12px] font-rh-sb ${
+      isActive
+        ? "bg-sfx-card"
+        : isError
+          ? "bg-sfx-danger text-sfx-card"
+          : "bg-sfx-danger text-sfx-card"
+    }`}
+    title={
+      isLoading || isFetching
+        ? "Loading pending KYC submissions..."
+        : isError
+          ? "Couldn't load pending KYC submissions."
+          : `${data?.length ?? 0} pending KYC submissions`
+    }
+  >
+    {badgeContent}
+  </span>
+)}
                         </div>
                     </div>
                     )}
