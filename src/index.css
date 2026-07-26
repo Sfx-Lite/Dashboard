@@ -1,29 +1,31 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 @font-face {
   font-family: "RedHat Display Regular";
-  src: url("./assets/fonts/RedHatDisplay-Regular.woff2") format("truetype");
+  src: url("./assets/fonts/RedHatDisplay-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "RedHat Display Medium";
-  src: url("./assets/fonts/RedHatDisplay-Medium.woff2") format("truetype");
+  src: url("./assets/fonts/RedHatDisplay-Medium.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "RedHat Display Semibold";
-  src: url("./assets/fonts/RedHatDisplay-SemiBold.woff2") format("truetype");
+  src: url("./assets/fonts/RedHatDisplay-SemiBold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "RedHat Display Bold";
-  src: url("./assets/fonts/RedHatDisplay-Bold.woff2") format("truetype");
+  src: url("./assets/fonts/RedHatDisplay-Bold.woff2") format("woff2");
   font-weight: 800;
   font-style: normal;
 }
@@ -39,9 +41,11 @@
   --color-sfx-ink: #201640;
   --color-sfx-muted: #756c8e;
   --color-sfx-success: #00bf63;
+  --color-sfx-success-bg: #E3F9EE;
   --color-sfx-danger: #dc2626;
   --color-sfx-danger-bg: #fdebec;
   --color-sfx-amber: #d97706;
+  --color-sfx-amber-bg: #FDF3E3;
 
   /* Fonts */
   --font-rh-r: "RedHat Display Regular";
@@ -69,8 +73,31 @@
   --breakpoints-sm: 480px;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-sfx-primary);
+  height: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
 body {
-  font-family: var(--font-dmsans-b);
+  font-family: var(--font-rh-r);
   background-color: var(--primary-color);
   color: var(--secondary-color);
+}
+
+button {
+  cursor: pointer;
+}
+
+.user__gradient {
+  background: linear-gradient(135deg, #8B6CFF, #5B3FD4);
 }
