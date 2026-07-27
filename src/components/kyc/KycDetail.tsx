@@ -14,6 +14,7 @@ import { getErrorMessage } from "../../utils/errors";
 import { docTypeLabel } from "../../utils/helper-funcs";
 import KycDetailSkeleton from "../loaders/KycDetailSkeleton";
 import ImageZoomModal from "../../components/kyc/ImageZoomModal";
+import { trackEvent } from "../../utils/trackEvent";
 
 type ZoomTarget = { src: string; alt: string } | null;
 
@@ -61,6 +62,13 @@ export default function KycDetail() {
           reason: reason.trim() || undefined,
         },
       }).unwrap();
+
+      if (status === "approved") {
+        trackEvent("kyc_approved", { submission_id: id });
+      }
+      else {
+        trackEvent("kyc_rejected", { reason: reason.trim(), submission_id: id });
+      }
 
       toast.success(
         status === "approved"
