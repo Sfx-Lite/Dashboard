@@ -73,6 +73,21 @@
   --breakpoints-sm: 480px;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-sfx-primary);
+  height: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
 body {
   font-family: var(--font-rh-r);
   background-color: var(--primary-color);

@@ -14,11 +14,11 @@ export type TopBarProps = {
 export default function TopBar({ searchValue, onSearchChange }: TopBarProps) {
     const [types, setTypes] = useState<string[]>([]);
     const [statuses, setStatuses] = useState<string[]>([]);
-    const title = useSelector((state: RootState) => state.topBar.title)
-    const location = useLocation()
-    const isUsersPage = location.pathname === "/users"
-    const isKycPage = location.pathname === "/kyc-review"
-    const isTransactionsPage = location.pathname === "/transactions"
+    const title = useSelector((state: RootState) => state.topBar.title);
+    const location = useLocation();
+    const isUsersPage = location.pathname === "/users";
+    const isKycPage = location.pathname === "/kyc-review";
+    const isTransactionsPage = location.pathname === "/transactions";
 
   return (
     <div className="py-[14px] px-[var(--spacing-screen-x)] flex items-center justify-between bg-sfx-card">
