@@ -202,7 +202,7 @@ export default function KycDetail() {
               onChange={(e) => setReason(e.target.value)}
               placeholder="e.g. Document photo is blurry"
               rows={3}
-              className="w-full rounded-card border border-sfx-muted/30 p-3 text-sm"
+              className="w-full rounded-card border border-sfx-muted/30 p-3 outline-0 text-sm resize-none"
             />
 
             <div className="flex items-center gap-[10px]">

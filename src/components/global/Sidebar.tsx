@@ -87,26 +87,26 @@ export default function Sidebar() {
                             </span>
                           </div>
 
-                          {href === "/kyc-review" && (
-  <span
-    className={`shrink-0 inline-flex size-[20px] items-center justify-center rounded-full text-[12px] font-rh-sb ${
-      isActive
-        ? "bg-sfx-card"
-        : isError
-          ? "bg-sfx-danger text-sfx-card"
-          : "bg-sfx-danger text-sfx-card"
-    }`}
-    title={
-      isLoading || isFetching
-        ? "Loading pending KYC submissions..."
-        : isError
-          ? "Couldn't load pending KYC submissions."
-          : `${data?.length ?? 0} pending KYC submissions`
-    }
-  >
-    {badgeContent}
-  </span>
-)}
+                          {href === "/kyc-review" && (isLoading || isFetching || isError || (data?.length ?? 0) > 0) && (
+                              <span
+                                className={`shrink-0 inline-flex size-[20px] items-center justify-center rounded-full text-[12px] font-rh-sb ${
+                                  isActive
+                                    ? "bg-sfx-card"
+                                    : isError
+                                      ? "bg-sfx-danger text-sfx-card"
+                                      : "bg-sfx-danger text-sfx-card"
+                                }`}
+                                title={
+                                  isLoading || isFetching
+                                    ? "Loading pending KYC submissions..."
+                                    : isError
+                                      ? "Couldn't load pending KYC submissions."
+                                      : `${data?.length ?? 0} pending KYC submissions`
+                                }
+                              >
+                                {badgeContent}
+                              </span>
+                            )}
                         </div>
                     </div>
                     )}
