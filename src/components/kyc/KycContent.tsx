@@ -16,9 +16,15 @@ const COLUMN_COUNT = 6;
 
 export default function KycContent() {
   const { data, isLoading, isFetching, isError, error, refetch } =
-    useGetKycSubmissionsQuery({ status: "pending" });
+    useGetKycSubmissionsQuery();
 
-  const rows = data ? withAttemptNumbers(data) : undefined;
+  const pendingAndReviewing = data?.filter(
+    (submission) => submission.status === "pending" || submission.status === "under_review"
+  );
+
+  console.log(data)
+
+  const rows = pendingAndReviewing ? withAttemptNumbers(pendingAndReviewing) : undefined;
 
   return (
     <section className="flex flex-col gap-[var(--spacing-screen-x)]">
