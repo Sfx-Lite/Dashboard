@@ -34,6 +34,8 @@ export default function KycDetail() {
     skip: !id,
   });
 
+  console.log(submission)
+
   const [reviewSubmission, { isLoading: isSubmitting }] =
     useReviewKycSubmissionMutation();
 
