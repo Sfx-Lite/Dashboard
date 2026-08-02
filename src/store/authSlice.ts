@@ -15,6 +15,11 @@ type AuthState = {
   user: AdminUser | null;
 };
 
+type TokenPair = {
+  accessToken: string;
+  refreshToken: string;
+};
+
 const STORAGE_KEY = "admin_auth";
 
 function loadInitialState(): AuthState {
@@ -46,6 +51,10 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     },
+    tokensRefreshed: (state, action: PayloadAction<TokenPair>) => {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+    },
     logout: (state) => {
       state.accessToken = null;
       state.refreshToken = null;
@@ -55,7 +64,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, logout } = authSlice.actions;
+export const { setCredentials, tokensRefreshed, logout } = authSlice.actions;
 export default authSlice.reducer;
 
 export const selectAuth = (state: { auth: AuthState }) => state.auth;
