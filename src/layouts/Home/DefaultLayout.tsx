@@ -5,6 +5,8 @@ import TopBar from "../../components/global/TopBar";
 
 export default function DefaultLayout() {
   const [search, setSearch] = useState<string>('');
+  const [types, setTypes] = useState<string[]>([]);
+  const [statuses, setStatuses] = useState<string[]>([]);
 
   return (
     <div className="flex relative min-h-dvh">
@@ -15,9 +17,16 @@ export default function DefaultLayout() {
       </div>
 
       <div className="min-h-dvh w-full overflow-y-auto md:ml-[15rem] md:h-dvh md:w-[calc(100vw-15rem)]">
-        <TopBar searchValue={search} onSearchChange={setSearch} />
+        <TopBar
+          searchValue={search}
+          onSearchChange={setSearch}
+          typesValue={types}
+          onTypesChange={setTypes}
+          statusesValue={statuses}
+          onStatusesChange={setStatuses}
+        />
         <main className="bg-sfx-bg w-full min-h-dvh bg-col-gray ">
-          <Outlet context={{ search }} />
+          <Outlet context={{ search, types, statuses }} />
         </main>
       </div>
     </div>

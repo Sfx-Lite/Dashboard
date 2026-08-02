@@ -3,6 +3,9 @@ import topBarReducer from './topBarSlice';
 import authReducer from './authSlice';
 import { auth } from "../api/auth";
 import { kyc } from "../api/kyc";
+import { users } from "../api/users";
+import { dashboard } from "../api/dashboard";
+import { transactions } from "../api/transactions";
 
 export const store = configureStore({
     reducer: {
@@ -10,11 +13,17 @@ export const store = configureStore({
         auth: authReducer,
         [auth.reducerPath]: auth.reducer,
         [kyc.reducerPath]: kyc.reducer,
+        [users.reducerPath]: users.reducer,
+        [dashboard.reducerPath]: dashboard.reducer,
+        [transactions.reducerPath]: transactions.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
             auth.middleware,
-            kyc.middleware
+            kyc.middleware,
+            users.middleware,
+            dashboard.middleware,
+            transactions.middleware
         ),
 })
 
