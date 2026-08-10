@@ -10,6 +10,7 @@ import {
   TableRow
 } from "../../components/ui/table";
 import SkeletonRows from "../loaders/SkeletonRows";
+import SuspendToggleButton from "./SuspendToggleButton";
 
 const COLUMN_COUNT = 6;
 
@@ -132,9 +133,16 @@ export default function UsersContent({
                     </span>
                   </TableCell>
                   <TableCell className="py-[11px] px-[16px]">
-                    <button className="py-[10px] px-[20px] font-rh-sb text-sfx-primary border-2 border-sfx-primary bg-sfx-card rounded-full">
-                      View
-                    </button>
+                    <div className="flex items-center gap-2 justify-end">
+                      <button className="py-[10px] px-[20px] font-rh-sb text-sfx-primary border-2 border-sfx-primary bg-sfx-card rounded-full">
+                        View
+                      </button>
+                      <SuspendToggleButton
+                        userId={user.id}
+                        username={user.username}
+                        suspended={user.suspended}
+                      />
+                    </div>
                   </TableCell>
                 </TableRow>
               ))
