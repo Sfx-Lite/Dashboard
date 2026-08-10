@@ -36,21 +36,25 @@ export type GetUsersParams = {
   suspended?: boolean;
 };
 
-type UsersListResponse = {
+type ApiEnvelope<T> = {
   status: boolean;
   message: string;
-  data: {
-    users: AdminUser[];
-    total: number;
-    limit: number;
-    offset: number;
-  };
+  data: T;
 };
+
+type UsersListResponse = ApiEnvelope<{
+  users: AdminUser[];
+  total: number;
+  limit: number;
+  offset: number;
+}>;
 
 export type UsersListResult = {
   users: AdminUser[];
   total: number;
 };
+
+export type ToggleUserStatusResult = AdminUser;
 
 export const users = createApi({
   reducerPath: "usersApi",
@@ -83,7 +87,18 @@ export const users = createApi({
             ]
           : [{ type: "User" as const, id: "LIST" }],
     }),
+    toggleUserStatus: builder.mutation<ToggleUserStatusResult, string>({
+      query: (id) => ({
+        url: `/users/${id}/status`,
+        method: "PATCH",
+      }),
+      transformResponse: (response: ApiEnvelope<AdminUser>) => response.data,
+      invalidatesTags: (_result, _error, id) => [
+        { type: "User", id },
+        { type: "User", id: "LIST" },
+      ],
+    }),
   }),
 });
 
-export const { useGetUsersQuery } = users;
+export const { useGetUsersQuery, useToggleUserStatusMutation } = users;
